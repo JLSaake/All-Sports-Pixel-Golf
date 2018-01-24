@@ -11,6 +11,6 @@ public class Player : MonoBehaviour {
 
    public void MovePlayer (float xPosition, float yPosition)
     {
-        this.gameObject.transform.position = new Vector3(xPosition, yPosition, 0);
+        this.gameObject.transform.position = new Vector2(xPosition, yPosition);
     }
 }

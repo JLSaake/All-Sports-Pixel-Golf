@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public Player player;                       // Player sprite
-    public Ball currentBall;                    // To be used for current ball in play
+    public BallManager ballManager;             // To be used for current ball in play
     public float power;                         // Power of the shot
     public float angle;                         // Angle of the shot
     public float maxShots = 8;                  // Max number of shots: Should equal length of ShotTypes
@@ -40,10 +40,11 @@ public class GameManager : MonoBehaviour {
 
     void Shot (float power, float angle)
     {
+        float startingY = _DetermineShotStartHeight();
 
     }
 
-    float _DetermineShotStartHeight (ShotTypes)
+    float _DetermineShotStartHeight ()
     {
         if (selectedShot == ShotTypes.BASEBALL ||
             selectedShot == ShotTypes.FOOTBALL ||
@@ -59,11 +60,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void EndStroke ()
-    {
-        player.MovePlayer(currentBall.transform.position.x, player.PLAYER_START_Y);
-        Destroy(currentBall.gameObject);
-    }
+    //void EndStroke ()
+    //{
+    //    player.MovePlayer(currentBall.transform.position.x, player.PLAYER_START_Y);
+    //    Destroy(currentBall.gameObject);
+    //}
 
     void ResetUsage ()
     {
