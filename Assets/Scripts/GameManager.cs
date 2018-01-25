@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public Player player;                       // Player sprite
-    public BallManager ballManager;             // To be used for current ball in play
+    public BallManager ballManager;             // Manages Ball mechanics and spawn
     public float power;                         // Power of the shot
     public float angle;                         // Angle of the shot
     public float maxShots = 8;                  // Max number of shots: Should equal length of ShotTypes
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour {
     void Shot (float power, float angle)
     {
         float startingY = _DetermineShotStartHeight();
+        ballManager.ShootBall(power, angle, player.gameObject.transform.position.x, startingY, selectedShot);
 
     }
 
@@ -60,11 +61,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    //void EndStroke ()
-    //{
-    //    player.MovePlayer(currentBall.transform.position.x, player.PLAYER_START_Y);
-    //    Destroy(currentBall.gameObject);
-    //}
+    void EndStroke ()
+    {
+        player.MovePlayer(ballManager.activeBall.transform.position.x, player.PLAYER_START_Y);
+        
+    }
 
     void ResetUsage ()
     {
@@ -81,5 +82,67 @@ public class GameManager : MonoBehaviour {
     void SelectShotType (ShotTypes shotType)
     {
         //TODO: state machine for checking if each shot type can be selected
+        if (shotType == ShotTypes.BASEBALL)
+        {
+            if (!usedBaseball)
+            {
+                selectedShot = ShotTypes.BASEBALL;
+            }
+        } else
+        if (shotType == ShotTypes.FOOTBALL)
+        {
+            if (!usedFootball)
+            {
+                selectedShot = ShotTypes.FOOTBALL;
+            }
+        }
+        else
+        if (shotType == ShotTypes.FRISBEE)
+        {
+            if (!usedFrisbee)
+            {
+                selectedShot = ShotTypes.FRISBEE;
+            }
+        }
+        else
+        if (shotType == ShotTypes.HOCKEYPUCK)
+        {
+            if (!usedHockeyPuck)
+            {
+                selectedShot = ShotTypes.HOCKEYPUCK;
+            }
+        }
+        else
+        if (shotType == ShotTypes.NERFFOOTBALL)
+        {
+            if (!usedNerfFootball)
+            {
+                selectedShot = ShotTypes.NERFFOOTBALL;
+            }
+        }
+        else
+        if (shotType == ShotTypes.SOCCERBALL)
+        {
+            if (!usedSoccerBall)
+            {
+                selectedShot = ShotTypes.SOCCERBALL;
+            }
+        }
+        else
+        if (shotType == ShotTypes.TENNISBALL)
+        {
+            if (!usedTennisBall)
+            {
+                selectedShot = ShotTypes.TENNISBALL;
+            }
+        }
+        else
+        if (shotType == ShotTypes.VOLLEYBALL)
+        {
+            if (!usedVolleyBall)
+            {
+                selectedShot = ShotTypes.VOLLEYBALL;
+            }
+        }
     }
 }
