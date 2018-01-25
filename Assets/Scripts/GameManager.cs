@@ -81,12 +81,19 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void EndStroke ()
+    public void EndStroke ()
     {
         player.MovePlayer(ballManager.liveBall.transform.position.x, player.PLAYER_START_Y);
         Destroy(ballManager.liveBall);
         
     }
+
+    public void WaterHazard()
+    {
+        ballManager.liveBall.transform.position = new Vector2(player.gameObject.transform.position.x, player.PLAYER_START_Y);
+        EndStroke();
+    }
+
 
     void ResetUsage ()
     {
