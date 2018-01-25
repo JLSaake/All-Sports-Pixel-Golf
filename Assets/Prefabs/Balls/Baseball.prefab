@@ -20,11 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4075158408867444}
   - component: {fileID: 212930634926727050}
-  - component: {fileID: 50176773870247608}
   - component: {fileID: 58813048807846918}
+  - component: {fileID: 50176773870247608}
   m_Layer: 0
   m_Name: Baseball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
