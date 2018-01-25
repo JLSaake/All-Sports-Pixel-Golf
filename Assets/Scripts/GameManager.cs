@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
     void FixedUpdate() {
         text.text = Mathf.RoundToInt(100 * power).ToString();
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
-        if (Input.GetKey(KeyCode.RightArrow) && power <= 1) // Change to positive / negative buttons
+        if (Input.GetButton("PowerUp") && power <= 1)
         {
             power += 0.01f;
             if (power > 1)
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour {
                 power = 1;
             }
         }
-        if (Input.GetKey(KeyCode.LeftArrow) && power >= 0)
+        if (Input.GetButton("PowerDown") && power >= 0)
         {
             power -= 0.01f;
             if (power < 0)
@@ -61,15 +61,53 @@ public class GameManager : MonoBehaviour {
                 power = 0;
             }
         }
-        if (Input.GetButton("Vertical"))
+        if (Input.GetButton("AngleUp"))
         {
-            angle += 0.2f * Input.GetAxis("Vertical");
+            angle += 0.5f;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetButton("AngleDown"))
+        {
+            angle -= 0.5f;
+        }
+
+        if (Input.GetButtonDown("SelectBaseball"))
         {
             SelectShotType(ShotTypes.BASEBALL);
+        } else 
+        if (Input.GetButtonDown("SelectFootball"))
+        {
+            SelectShotType(ShotTypes.FOOTBALL);
+        } else
+        if (Input.GetButtonDown("SelectFrisbee"))
+        {
+            SelectShotType(ShotTypes.FRISBEE);
+        } else
+        if (Input.GetButtonDown("SelectHockey"))
+        {
+            SelectShotType(ShotTypes.HOCKEYPUCK);
+        } else
+        if (Input.GetButtonDown("SelectNerf"))
+        {
+            SelectShotType(ShotTypes.NERFFOOTBALL);
+        } else
+        if (Input.GetButtonDown("SelectSoccer"))
+        {
+            SelectShotType(ShotTypes.SOCCERBALL);
+        } else
+        if (Input.GetButtonDown("SelectTennis"))
+        {
+            SelectShotType(ShotTypes.TENNISBALL);
+        } else
+        if (Input.GetButtonDown("SelectVolley"))
+        {
+            SelectShotType(ShotTypes.VOLLEYBALL);
         }
-        if (Input.GetButtonDown("Jump") && !inPlay && selectedShot != ShotTypes.UNSELECTED)
+
+
+
+
+
+        if (Input.GetButtonDown("Shoot") && !inPlay && selectedShot != ShotTypes.UNSELECTED)
         {
             Shot(power, angle);
             inPlay = true;
@@ -126,7 +164,7 @@ public class GameManager : MonoBehaviour {
         Destroy(ballManager.liveBall);
         ballManager.activeBall = null;
         arrow.SetActive(true);
-        if (mainCamera.transform.position.x <= 235)
+        if (player.transform.position.x <= 255)
         {
             mainCamera.transform.position = new Vector3(player.transform.position.x + 20, mainCamera.transform.position.y,
                                                         mainCamera.transform.position.z);
