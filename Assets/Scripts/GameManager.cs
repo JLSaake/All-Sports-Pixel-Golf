@@ -41,9 +41,9 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate() {
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
-        if (Input.GetButton("Horizontal"))
+        if (Input.GetButton("Horizontal")) // Change to positive / negative buttons
         {
-            power += 0.2f * Input.GetAxis("Horizontal");
+            power += 0.1f * Input.GetAxis("Horizontal");
         }
         if (Input.GetButton("Vertical"))
         {

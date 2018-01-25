@@ -3530,6 +3530,7 @@ GameObject:
   - component: {fileID: 1885775386}
   - component: {fileID: 1885775389}
   - component: {fileID: 1885775388}
+  - component: {fileID: 1885775390}
   m_Layer: 0
   m_Name: Flag
   m_TagString: Untagged
@@ -3630,6 +3631,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02852c3ac830ac47a47fc1c0f474e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1885775390
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885775385}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 605168d3011e8eb4aa15d0ac935dc3d1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1890779370
 GameObject:
   m_ObjectHideFlags: 0
