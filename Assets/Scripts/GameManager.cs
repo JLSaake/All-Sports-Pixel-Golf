@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+
     public Player player;                       // Player sprite
     public BallManager ballManager;             // Manages Ball mechanics and spawn
     public SpriteManager sm;
     public float power;                         // Power of the shot
     public float angle;                         // Angle of the shot
-    public float maxShots = 8;                  // Max number of shots: Should equal length of ShotTypes
-    public float numShots = 0;                  // Number of shots taken already
+    public int maxShots = 8;                  // Max number of shots: Should equal length of ShotTypes
+    public int numShots = 0;                  // Number of shots taken already
     public enum ShotTypes { BASEBALL, FRISBEE, NERFFOOTBALL, FOOTBALL,
         SOCCERBALL, VOLLEYBALL, TENNISBALL, HOCKEYPUCK, UNSELECTED};
     public ShotTypes selectedShot = ShotTypes.UNSELECTED;              // Actively selected shot type
@@ -211,7 +212,8 @@ public class GameManager : MonoBehaviour {
         inPlay = false;
         if (numShots >= maxShots)
         {
-            // End game in loss state (out of shots)
+            sm.Loss();
+            Invoke("ReloadGame", 10);
         }
 
     }
@@ -345,5 +347,16 @@ public class GameManager : MonoBehaviour {
         }
         sm.UseShot();
         selectedShot = ShotTypes.UNSELECTED;
+    }
+
+    public void Win()
+    {
+        sm.Win(numShots);
+        Invoke("ReloadGame", 10);
+    }
+
+    void ReloadGame()
+    {
+        Application.LoadLevel(Application.loadedLevel);
     }
 }

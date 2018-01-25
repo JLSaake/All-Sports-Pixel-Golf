@@ -28,10 +28,18 @@ public class SpriteManager : MonoBehaviour {
 
     public GameManager.ShotTypes selectedShot = GameManager.ShotTypes.UNSELECTED;
 
+    public GameObject panel;
+    public Text winHeader;
+    public Text losstext;
+    public Text winText;
+
 
 	// Use this for initialization
 	void Start () {
-		
+        panel.SetActive(false);
+        winHeader.gameObject.SetActive(false);
+        losstext.gameObject.SetActive(false);
+        winText.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -168,6 +176,38 @@ public class SpriteManager : MonoBehaviour {
         if (selectedShot == GameManager.ShotTypes.VOLLEYBALL)
         {
             volleyball.sprite = selected;
+        }
+    }
+
+    public void Loss()
+    {
+        panel.SetActive(true);
+        losstext.gameObject.SetActive(true);
+    }
+
+    public void Win(int shots)
+    {
+        panel.SetActive(true);
+        winHeader.gameObject.SetActive(true);
+        winText.gameObject.SetActive(true);
+        if (shots == 8)
+        {
+            winText.text = "Par";
+        } else
+        if (shots == 7)
+        {
+            winText.text = "Birdie";
+        } else
+        if (shots == 6)
+        {
+            winText.text = "Eagle";
+        } else
+        if (shots == 5)
+        {
+            winText.text = "Double Eagle";
+        } else
+        {
+            winText.text = "Albatros!";
         }
     }
 }
