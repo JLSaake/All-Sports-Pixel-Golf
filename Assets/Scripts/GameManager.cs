@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
 
     private bool cameraFollow = false;
     public Text text;
+    public Text textyds;
 
     public Transform cameraStart;
     public Transform cameraFlag;
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour {
 
 
         text.text = Mathf.RoundToInt(100 * power).ToString();
+        textyds.text = Mathf.RoundToInt(Mathf.Abs(255 - player.transform.position.x)).ToString();
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
         if (Input.GetButton("PowerUp") && power <= 1 && !cameraSweeping)
         {
