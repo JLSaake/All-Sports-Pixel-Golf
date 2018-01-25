@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour {
     float _DetermineShotStartHeight ()
     {
         if (selectedShot == ShotTypes.BASEBALL ||
-            selectedShot == ShotTypes.FOOTBALL ||
             selectedShot == ShotTypes.FRISBEE ||
             selectedShot == ShotTypes.NERFFOOTBALL ||
             selectedShot == ShotTypes.TENNISBALL ||
@@ -108,13 +107,19 @@ public class GameManager : MonoBehaviour {
 
         player.MovePlayer(ballManager.liveBall.transform.position.x, player.PLAYER_START_Y);
         Destroy(ballManager.liveBall);
+        arrow.SetActive(true);
         if (mainCamera.transform.position.x <= 235)
         {
             mainCamera.transform.position = new Vector3(player.transform.position.x + 20, mainCamera.transform.position.y,
                                                         mainCamera.transform.position.z);
+            arrow.transform.position = new Vector2(player.transform.position.x + 8, arrow.transform.position.y);
         }
-        arrow.SetActive(true);
-        arrow.transform.position = new Vector2(player.transform.position.x + 8, arrow.transform.position.y);
+        else
+        {
+            mainCamera.transform.position = new Vector3(player.transform.position.x - 20, mainCamera.transform.position.y,
+                                            mainCamera.transform.position.z);
+            arrow.transform.position = new Vector2(player.transform.position.x - 8, arrow.transform.position.y);
+        }
 
     }
 
