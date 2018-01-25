@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour {
     private bool cameraFollow = false;
     public Text text;
 
+    private Transform cameraStart;
+    private Transform cameraFlag;
+
 
     // Has type of shot been used
     public bool usedBaseball = false;
@@ -34,11 +37,12 @@ public class GameManager : MonoBehaviour {
     public bool inPlay = false;
 
 
-
     // Use this for initialization
     void Start() {
+        cameraStart = mainCamera.transform;
         player.MovePlayer(player.PLAYER_START_X, player.PLAYER_START_Y);
         ResetUsage();
+        CameraSweep();
     }
 
     // Update is called once per frame
@@ -131,6 +135,21 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    void CameraSweep()
+    {
+        float speed = 1.0F;
+        float startTime = Time.deltaTime;
+        float journeyLength = 10f;    
+        mainCamera.transform.position = new Vector3(255, mainCamera.transform.position.y, mainCamera.transform.position.z);
+        cameraFlag = mainCamera.transform;
+        yield return new WaitForSeconds(3);
+        while (mainCamera.transform.position.x > 0)
+        {
+            float distCovered = (Time.time - startTime) * speed;
+            float fracJourney = distCovered / journeyLength;
+            transform.position = Vector3.Lerp(cameraStart.position, cameraFlag.position, fracJourney);
+        }
+    }
 
     void Shot (float _power, float _angle)
     {
