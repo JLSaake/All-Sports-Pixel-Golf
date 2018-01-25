@@ -7,7 +7,6 @@ public class BallManager : MonoBehaviour {
     public float shotScale;
 
     public GameObject activeBall;
-    public Ball liveBallScript;
     public GameObject liveBall;
 
     public GameObject Baseball;                                 // Baseball prefab
@@ -35,8 +34,9 @@ public class BallManager : MonoBehaviour {
         _SetBall(ballType);
         _SetShotScale(ballType);
         liveBall = Instantiate(activeBall, new Vector2(startingX, startingY), Quaternion.identity) as GameObject;
-        liveBallScript = liveBall.GetComponent<Ball>();
-        liveBallScript.FireShot(angle, shotScale * power, startingY);
+        Rigidbody2D rb = liveBall.GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad) * power,
+                                    Mathf.Sin(angle * Mathf.Deg2Rad) * power);
     }
 
     void _SetBall(GameManager.ShotTypes ballType)

@@ -22,20 +22,20 @@ public class Test_Throw : MonoBehaviour {
 	void Update () {
         if (Input.GetButton("Horizontal"))
         {
-            power += 0.1f * Input.GetAxis("Horizontal");
+            power += 0.2f * Input.GetAxis("Horizontal");
         }
         if (Input.GetButton("Vertical"))
         {
-            angle += 0.1f * Input.GetAxis("Vertical");
+            angle += 0.2f * Input.GetAxis("Vertical");
         }
 		if (Input.GetButton("Jump"))
         {
             if (positive_bar)
             {
-                power += 0.25f; // Change to a global variable
+                power += 0.01f;
             } else
             {
-                power -= 0.25f;
+                power -= 0.01f;
             }
             if (power >= max_power || power <= 0)
             {

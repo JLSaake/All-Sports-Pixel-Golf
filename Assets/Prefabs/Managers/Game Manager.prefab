@@ -57,7 +57,7 @@ MonoBehaviour:
   angle: 0
   maxShots: 8
   numShots: 0
-  selectedShot: 0
+  selectedShot: 8
   usedBaseball: 0
   usedFrisbee: 0
   usedNerfFootball: 0

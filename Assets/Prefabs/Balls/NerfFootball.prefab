@@ -20,7 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4120190440939358}
   - component: {fileID: 212632536681978346}
-  - component: {fileID: 114731385300407988}
+  - component: {fileID: 60955506433977386}
+  - component: {fileID: 50195309079064422}
   m_Layer: 0
   m_Name: NerfFootball
   m_TagString: Untagged
@@ -41,17 +42,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114731385300407988
-MonoBehaviour:
+--- !u!50 &50195309079064422
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1410179777066482}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 1
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
+--- !u!60 &60955506433977386
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1410179777066482}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8931aa1a35c4eb4a8393fe709dcf566, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.9897563, y: -0.50830144}
+      - {x: -0.7698586, y: -0.49586824}
+      - {x: -0.46627057, y: -0.114361465}
+      - {x: -0.06505689, y: -0.12884408}
+      - {x: 0.14512305, y: -0.386448}
+      - {x: 0.51895905, y: -0.37600395}
+      - {x: 0.53187424, y: -0.39593104}
+      - {x: 0.5390323, y: -0.37513313}
+      - {x: 0.743907, y: -0.37513316}
+      - {x: 0.9897566, y: -0.06658407}
+      - {x: 0.9841657, y: 0.13661644}
+      - {x: 0.6926886, y: 0.3956204}
+      - {x: 0.17867759, y: 0.39250433}
+      - {x: -0.028967604, y: 0.11786634}
+      - {x: -0.4773784, y: 0.13144404}
+      - {x: -0.7791787, y: 0.54059744}
+      - {x: -0.9692688, y: 0.53903264}
 --- !u!212 &212632536681978346
 SpriteRenderer:
   m_ObjectHideFlags: 1

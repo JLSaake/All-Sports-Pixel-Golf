@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour {
     public float maxShots = 8;                  // Max number of shots: Should equal length of ShotTypes
     public float numShots = 0;                  // Number of shots taken already
     public enum ShotTypes { BASEBALL, FRISBEE, NERFFOOTBALL, FOOTBALL,
-        SOCCERBALL, VOLLEYBALL, TENNISBALL, HOCKEYPUCK };
-    public ShotTypes selectedShot;              // Actively selected shot type
+        SOCCERBALL, VOLLEYBALL, TENNISBALL, HOCKEYPUCK, UNSELECTED};
+    public ShotTypes selectedShot = ShotTypes.UNSELECTED;              // Actively selected shot type
 
     // Has type of shot been used
     public bool usedBaseball = false;
@@ -33,15 +33,35 @@ public class GameManager : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
-
+    void FixedUpdate() {
+        if (Input.GetButton("Horizontal"))
+        {
+            power += 0.2f * Input.GetAxis("Horizontal");
+        }
+        if (Input.GetButton("Vertical"))
+        {
+            angle += 0.2f * Input.GetAxis("Vertical");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectShotType(ShotTypes.BASEBALL);
+        }
+        if (Input.GetButtonDown("Jump"))
+        {
+            Shot(power, angle);
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            EndStroke();
+        }
     }
 
 
-    void Shot (float power, float angle)
+    void Shot (float _power, float _angle)
     {
         float startingY = _DetermineShotStartHeight();
-        ballManager.ShootBall(power, angle, player.gameObject.transform.position.x, startingY, selectedShot);
+        ballManager.ShootBall(_power, _angle, player.gameObject.transform.position.x, startingY, selectedShot);
+        _useShot(selectedShot);
 
     }
 
@@ -63,7 +83,8 @@ public class GameManager : MonoBehaviour {
 
     void EndStroke ()
     {
-        player.MovePlayer(ballManager.activeBall.transform.position.x, player.PLAYER_START_Y);
+        player.MovePlayer(ballManager.liveBall.transform.position.x, player.PLAYER_START_Y);
+        Destroy(ballManager.liveBall);
         
     }
 
@@ -144,5 +165,48 @@ public class GameManager : MonoBehaviour {
                 selectedShot = ShotTypes.VOLLEYBALL;
             }
         }
+    }
+
+    void _useShot (ShotTypes shotType)
+    {
+        if (shotType == ShotTypes.BASEBALL)
+        {
+            usedBaseball = true;
+        } else
+        if (shotType == ShotTypes.FOOTBALL)
+        {
+            usedFootball = true;
+        }
+        else
+        if (shotType == ShotTypes.FRISBEE)
+        {
+            usedFrisbee = true;
+        }
+        else
+        if (shotType == ShotTypes.HOCKEYPUCK)
+        {
+            usedHockeyPuck = true;
+        }
+        else
+        if (shotType == ShotTypes.NERFFOOTBALL)
+        {
+            usedNerfFootball = true;
+        }
+        else
+        if (shotType == ShotTypes.SOCCERBALL)
+        {
+            usedSoccerBall = true;
+        }
+        else
+        if (shotType == ShotTypes.TENNISBALL)
+        {
+            usedTennisBall = true;
+        }
+        else
+        if (shotType == ShotTypes.VOLLEYBALL)
+        {
+            usedVolleyBall = true;
+        }
+        selectedShot = ShotTypes.UNSELECTED;
     }
 }
