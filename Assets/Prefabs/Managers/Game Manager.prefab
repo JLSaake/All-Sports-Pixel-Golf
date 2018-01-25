@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   ballManager: {fileID: 0}
+  sm: {fileID: 0}
   power: 0
   angle: 0
   maxShots: 8

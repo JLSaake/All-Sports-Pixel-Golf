@@ -622,6 +622,65 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &230447072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 230447073}
+  - component: {fileID: 230447074}
+  m_Layer: 0
+  m_Name: Sprite Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &230447073
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 230447072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.13848, y: 14.866048, z: -10.1484375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &230447074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 230447072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c834ca0b4ea57c4ebd28ea5075c6b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  used: {fileID: 21300000, guid: 9a40724346bd3704784c6b8cb970bef3, type: 3}
+  selected: {fileID: 21300000, guid: 4210c9995feaddb4480857cf6271d6e6, type: 3}
+  _baseball: {fileID: 21300000, guid: 3abc42bb453ea9d4ba1a587bdc10c2c5, type: 3}
+  _football: {fileID: 21300000, guid: 9ac144092ae80f04185dd4f3a02e6473, type: 3}
+  _frisbee: {fileID: 21300000, guid: 797a1e6a4c611e74f9eaca9ddc880694, type: 3}
+  _hockey: {fileID: 21300000, guid: 5efc5953b4dbf404db4e7341bd751ef1, type: 3}
+  _nerf: {fileID: 21300000, guid: 5e4e6f507ca36fb459fe0fe5de402838, type: 3}
+  _soccer: {fileID: 21300000, guid: 386549dafdebff644a2c867074a56cc1, type: 3}
+  _tennis: {fileID: 21300000, guid: 4f158248ae7ef3144b44823eaf9d0678, type: 3}
+  _volleyball: {fileID: 21300000, guid: 6170be52eb348a5499da69a06d40d99e, type: 3}
+  baseball: {fileID: 1429311057}
+  football: {fileID: 2140186065}
+  frisbee: {fileID: 2001905180}
+  hockey: {fileID: 65376817}
+  nerf: {fileID: 293277692}
+  soccer: {fileID: 552929274}
+  tennis: {fileID: 83756992}
+  volleyball: {fileID: 676809595}
+  selectedShot: 8
 --- !u!114 &247366961 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114276873931500564, guid: f321d0303cac50a41bce6b2773332e0d,
@@ -4285,6 +4344,11 @@ Prefab:
       propertyPath: ballManager
       value: 
       objectReference: {fileID: 247366961}
+    - target: {fileID: 114648054496782944, guid: eca10acef2eeee54d83381510d7ac777,
+        type: 2}
+      propertyPath: sm
+      value: 
+      objectReference: {fileID: 230447074}
     - target: {fileID: 114648054496782944, guid: eca10acef2eeee54d83381510d7ac777,
         type: 2}
       propertyPath: mainCamera

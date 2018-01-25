@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
 
     public Player player;                       // Player sprite
     public BallManager ballManager;             // Manages Ball mechanics and spawn
+    public SpriteManager sm;
     public float power;                         // Power of the shot
     public float angle;                         // Angle of the shot
     public float maxShots = 8;                  // Max number of shots: Should equal length of ShotTypes
@@ -299,6 +300,7 @@ public class GameManager : MonoBehaviour {
                 selectedShot = ShotTypes.VOLLEYBALL;
             }
         }
+        sm.ChangeSelection(selectedShot);
     }
 
     void _useShot (ShotTypes shotType)
@@ -341,6 +343,7 @@ public class GameManager : MonoBehaviour {
         {
             usedVolleyBall = true;
         }
+        sm.UseShot();
         selectedShot = ShotTypes.UNSELECTED;
     }
 }
