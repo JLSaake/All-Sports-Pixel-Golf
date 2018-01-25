@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour {
         float startingY = _DetermineShotStartHeight();
         ballManager.ShootBall(_power, _angle, player.gameObject.transform.position.x, startingY, selectedShot);
         _useShot(selectedShot);
+        arrow.SetActive(false);
 
     }
 
@@ -112,6 +113,8 @@ public class GameManager : MonoBehaviour {
             mainCamera.transform.position = new Vector3(player.transform.position.x + 20, mainCamera.transform.position.y,
                                                         mainCamera.transform.position.z);
         }
+        arrow.SetActive(true);
+        arrow.transform.position = new Vector2(player.transform.position.x + 8, arrow.transform.position.y);
 
     }
 
