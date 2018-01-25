@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
     public ShotTypes selectedShot = ShotTypes.UNSELECTED;              // Actively selected shot type
     public Camera mainCamera;
 
+    public GameObject arrow;
+
     private bool cameraFollow = false;
 
 
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
+        arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
         if (Input.GetButton("Horizontal"))
         {
             power += 0.2f * Input.GetAxis("Horizontal");
