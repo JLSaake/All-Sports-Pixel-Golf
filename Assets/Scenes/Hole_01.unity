@@ -2714,6 +2714,11 @@ Prefab:
       propertyPath: ballManager
       value: 
       objectReference: {fileID: 247366961}
+    - target: {fileID: 114648054496782944, guid: eca10acef2eeee54d83381510d7ac777,
+        type: 2}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 718721918}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eca10acef2eeee54d83381510d7ac777, type: 2}
   m_IsPrefabParent: 0

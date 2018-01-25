@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour {
     public enum ShotTypes { BASEBALL, FRISBEE, NERFFOOTBALL, FOOTBALL,
         SOCCERBALL, VOLLEYBALL, TENNISBALL, HOCKEYPUCK, UNSELECTED};
     public ShotTypes selectedShot = ShotTypes.UNSELECTED;              // Actively selected shot type
+    public Camera mainCamera;
+
+    private bool cameraFollow = false;
+
 
     // Has type of shot been used
     public bool usedBaseball = false;
@@ -54,6 +58,19 @@ public class GameManager : MonoBehaviour {
         {
             EndStroke();
         }
+
+        if (ballManager.liveBall != null && !cameraFollow && 
+            Mathf.RoundToInt(ballManager.liveBall.transform.position.x) == 
+            Mathf.RoundToInt(mainCamera.transform.position.x))
+        {
+            cameraFollow = true;
+        }
+        if (cameraFollow)
+        {
+            mainCamera.transform.position = 
+                new Vector3(ballManager.liveBall.transform.position.x, mainCamera.transform.position.y,
+                            mainCamera.transform.position.z);
+        }
     }
 
 
@@ -83,9 +100,16 @@ public class GameManager : MonoBehaviour {
 
     public void EndStroke ()
     {
+        cameraFollow = false;
+
         player.MovePlayer(ballManager.liveBall.transform.position.x, player.PLAYER_START_Y);
         Destroy(ballManager.liveBall);
-        
+        if (mainCamera.transform.position.x <= 235)
+        {
+            mainCamera.transform.position = new Vector3(player.transform.position.x + 20, mainCamera.transform.position.y,
+                                                        mainCamera.transform.position.z);
+        }
+
     }
 
     public void WaterHazard()

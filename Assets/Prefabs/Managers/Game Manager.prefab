@@ -58,6 +58,7 @@ MonoBehaviour:
   maxShots: 8
   numShots: 0
   selectedShot: 8
+  mainCamera: {fileID: 0}
   usedBaseball: 0
   usedFrisbee: 0
   usedNerfFootball: 0
