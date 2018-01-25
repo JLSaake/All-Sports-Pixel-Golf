@@ -6,8 +6,8 @@ public class Player : MonoBehaviour {
 
     public float PLAYER_START_X = 0;
     public float PLAYER_START_Y = 4;
-    public float BALL_LOWER_Y = 1;
-    public float BALL_UPPER_Y = 5;
+    public float BALL_LOWER_Y = 2;
+    public float BALL_UPPER_Y = 6;
 
    public void MovePlayer (float xPosition, float yPosition)
     {

@@ -68,3 +68,4 @@ MonoBehaviour:
   usedVolleyBall: 0
   usedTennisBall: 0
   usedHockeyPuck: 0
+  inPlay: 0

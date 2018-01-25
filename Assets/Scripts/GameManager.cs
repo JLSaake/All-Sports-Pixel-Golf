@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour {
     public GameObject arrow;
 
     private bool cameraFollow = false;
+    public Text text;
 
 
     // Has type of shot been used
@@ -41,10 +43,23 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
+        text.text = Mathf.RoundToInt(100 * power).ToString();
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
-        if (Input.GetButton("Horizontal")) // Change to positive / negative buttons
+        if (Input.GetKey(KeyCode.RightArrow) && power <= 1) // Change to positive / negative buttons
         {
-            power += 0.1f * Input.GetAxis("Horizontal");
+            power += 0.01f;
+            if (power > 1)
+            {
+                power = 1;
+            }
+        }
+        if (Input.GetKey(KeyCode.LeftArrow) && power >= 0)
+        {
+            power -= 0.01f;
+            if (power < 0)
+            {
+                power = 0;
+            }
         }
         if (Input.GetButton("Vertical"))
         {
@@ -54,10 +69,10 @@ public class GameManager : MonoBehaviour {
         {
             SelectShotType(ShotTypes.BASEBALL);
         }
-        if (Input.GetButtonDown("Jump") && !inPlay)
+        if (Input.GetButtonDown("Jump") && !inPlay && selectedShot != ShotTypes.UNSELECTED)
         {
-            inPlay = true;
             Shot(power, angle);
+            inPlay = true;
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
