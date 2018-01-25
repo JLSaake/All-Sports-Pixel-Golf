@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
     public bool usedVolleyBall = false;
     public bool usedTennisBall = false;
     public bool usedHockeyPuck = false;
+    public bool inPlay = false;
 
 
 
@@ -53,8 +54,9 @@ public class GameManager : MonoBehaviour {
         {
             SelectShotType(ShotTypes.BASEBALL);
         }
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && !inPlay)
         {
+            inPlay = true;
             Shot(power, angle);
         }
         if (Input.GetKeyDown(KeyCode.Return))
@@ -83,7 +85,7 @@ public class GameManager : MonoBehaviour {
         ballManager.ShootBall(_power, _angle, player.gameObject.transform.position.x, startingY, selectedShot);
         _useShot(selectedShot);
         arrow.SetActive(false);
-
+        numShots++;
     }
 
     float _DetermineShotStartHeight ()
@@ -107,6 +109,7 @@ public class GameManager : MonoBehaviour {
 
         player.MovePlayer(ballManager.liveBall.transform.position.x, player.PLAYER_START_Y);
         Destroy(ballManager.liveBall);
+        ballManager.activeBall = null;
         arrow.SetActive(true);
         if (mainCamera.transform.position.x <= 235)
         {
@@ -119,6 +122,11 @@ public class GameManager : MonoBehaviour {
             mainCamera.transform.position = new Vector3(player.transform.position.x - 20, mainCamera.transform.position.y,
                                             mainCamera.transform.position.z);
             arrow.transform.position = new Vector2(player.transform.position.x - 8, arrow.transform.position.y);
+        }
+        inPlay = false;
+        if (numShots >= maxShots)
+        {
+            // End game in loss state (out of shots)
         }
 
     }
