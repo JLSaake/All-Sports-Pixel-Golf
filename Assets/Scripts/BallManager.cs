@@ -18,6 +18,8 @@ public class BallManager : MonoBehaviour {
     public GameObject TennisBall;                               // TennisBall prefab
     public GameObject HockeyPuck;                               // HockeyPuck prefab
 
+    public Rigidbody2D rb;
+
 
     // Use this for initialization
     void Start () {
@@ -26,6 +28,7 @@ public class BallManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 	}
 
     public void ShootBall(float power, float angle, float startingX, float startingY, GameManager.ShotTypes ballType)
@@ -33,7 +36,7 @@ public class BallManager : MonoBehaviour {
         _SetBall(ballType);
         _SetShotScale(ballType);
         liveBall = Instantiate(activeBall, new Vector2(startingX, startingY), Quaternion.identity) as GameObject;
-        Rigidbody2D rb = liveBall.GetComponent<Rigidbody2D>();
+        rb = liveBall.GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad) * power * shotScale,
                                     Mathf.Sin(angle * Mathf.Deg2Rad) * power * shotScale);
     }

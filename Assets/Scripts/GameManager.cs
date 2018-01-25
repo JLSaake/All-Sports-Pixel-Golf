@@ -44,9 +44,9 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        mainCamera.transform.position = new Vector3(255, mainCamera.transform.position.y, mainCamera.transform.position.z);
         player.MovePlayer(player.PLAYER_START_X, player.PLAYER_START_Y);
         ResetUsage();
-        CameraSweep();
         Invoke("BeginSweep", 2);
     }
 
@@ -56,9 +56,6 @@ public class GameManager : MonoBehaviour {
 
         if (cameraSweeping)
         {
-            Debug.Log("Sweeping");
-            Debug.Log(cameraFlag.transform.position);
-            Debug.Log(cameraStart.transform.position);
             mainCamera.transform.position = Vector3.Lerp(cameraFlag.position, cameraStart.position, fracJourney);
             fracJourney += 0.003f;
             if (fracJourney >= 1)
@@ -70,7 +67,7 @@ public class GameManager : MonoBehaviour {
 
         text.text = Mathf.RoundToInt(100 * power).ToString();
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
-        if (Input.GetButton("PowerUp") && power <= 1)
+        if (Input.GetButton("PowerUp") && power <= 1 && !cameraSweeping)
         {
             power += 0.01f;
             if (power > 1)
@@ -78,7 +75,7 @@ public class GameManager : MonoBehaviour {
                 power = 1;
             }
         }
-        if (Input.GetButton("PowerDown") && power >= 0)
+        if (Input.GetButton("PowerDown") && power >= 0 && !cameraSweeping)
         {
             power -= 0.01f;
             if (power < 0)
@@ -86,44 +83,44 @@ public class GameManager : MonoBehaviour {
                 power = 0;
             }
         }
-        if (Input.GetButton("AngleUp"))
+        if (Input.GetButton("AngleUp") && !cameraSweeping)
         {
             angle += 0.5f;
         }
-        if (Input.GetButton("AngleDown"))
+        if (Input.GetButton("AngleDown") && !cameraSweeping)
         {
             angle -= 0.5f;
         }
 
-        if (Input.GetButtonDown("SelectBaseball"))
+        if (Input.GetButtonDown("SelectBaseball") && !cameraSweeping)
         {
             SelectShotType(ShotTypes.BASEBALL);
         } else 
-        if (Input.GetButtonDown("SelectFootball"))
+        if (Input.GetButtonDown("SelectFootball") && !cameraSweeping)
         {
             SelectShotType(ShotTypes.FOOTBALL);
         } else
-        if (Input.GetButtonDown("SelectFrisbee"))
+        if (Input.GetButtonDown("SelectFrisbee") && !cameraSweeping)
         {
             SelectShotType(ShotTypes.FRISBEE);
         } else
-        if (Input.GetButtonDown("SelectHockey"))
+        if (Input.GetButtonDown("SelectHockey") && !cameraSweeping)
         {
             SelectShotType(ShotTypes.HOCKEYPUCK);
         } else
-        if (Input.GetButtonDown("SelectNerf"))
+        if (Input.GetButtonDown("SelectNerf") && !cameraSweeping)
         {
             SelectShotType(ShotTypes.NERFFOOTBALL);
         } else
-        if (Input.GetButtonDown("SelectSoccer"))
+        if (Input.GetButtonDown("SelectSoccer") && !cameraSweeping)
         {
             SelectShotType(ShotTypes.SOCCERBALL);
         } else
-        if (Input.GetButtonDown("SelectTennis"))
+        if (Input.GetButtonDown("SelectTennis") && !cameraSweeping)
         {
             SelectShotType(ShotTypes.TENNISBALL);
         } else
-        if (Input.GetButtonDown("SelectVolley"))
+        if (Input.GetButtonDown("SelectVolley") && !cameraSweeping)
         {
             SelectShotType(ShotTypes.VOLLEYBALL);
         }
@@ -132,14 +129,10 @@ public class GameManager : MonoBehaviour {
 
 
 
-        if (Input.GetButtonDown("Shoot") && !inPlay && selectedShot != ShotTypes.UNSELECTED)
+        if (Input.GetButtonDown("Shoot") && !inPlay && selectedShot != ShotTypes.UNSELECTED && !cameraSweeping)
         {
             Shot(power, angle);
             inPlay = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            EndStroke();
         }
 
         if (ballManager.liveBall != null && !cameraFollow && 
@@ -154,19 +147,19 @@ public class GameManager : MonoBehaviour {
                 new Vector3(ballManager.liveBall.transform.position.x, mainCamera.transform.position.y,
                             mainCamera.transform.position.z);
         }
+
+        if (inPlay && ballManager.liveBall != null && ballManager.rb.velocity.magnitude == 0)
+        {
+            EndStroke();
+        }
     }
     
     void BeginSweep()
     {
-        Debug.Log("BeginningSweep");
         startTime = Time.deltaTime;
         cameraSweeping = true;
     }
 
-    void CameraSweep()
-    { 
-        mainCamera.transform.position = new Vector3(255, mainCamera.transform.position.y, mainCamera.transform.position.z);
-    }
 
     void Shot (float _power, float _angle)
     {
