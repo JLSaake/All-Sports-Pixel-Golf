@@ -21,8 +21,12 @@ public class GameManager : MonoBehaviour {
     private bool cameraFollow = false;
     public Text text;
 
-    private Transform cameraStart;
-    private Transform cameraFlag;
+    public Transform cameraStart;
+    public Transform cameraFlag;
+
+    public float speed = 1f;
+    public float startTime;
+    public float fracJourney = 0.00f;
 
 
     // Has type of shot been used
@@ -35,18 +39,35 @@ public class GameManager : MonoBehaviour {
     public bool usedTennisBall = false;
     public bool usedHockeyPuck = false;
     public bool inPlay = false;
+    public bool cameraSweeping = false;
 
 
     // Use this for initialization
     void Start() {
-        cameraStart = mainCamera.transform;
         player.MovePlayer(player.PLAYER_START_X, player.PLAYER_START_Y);
         ResetUsage();
         CameraSweep();
+        Invoke("BeginSweep", 2);
     }
+
 
     // Update is called once per frame
     void FixedUpdate() {
+
+        if (cameraSweeping)
+        {
+            Debug.Log("Sweeping");
+            Debug.Log(cameraFlag.transform.position);
+            Debug.Log(cameraStart.transform.position);
+            mainCamera.transform.position = Vector3.Lerp(cameraFlag.position, cameraStart.position, fracJourney);
+            fracJourney += 0.003f;
+            if (fracJourney >= 1)
+            {
+                cameraSweeping = false;
+            }
+        }
+
+
         text.text = Mathf.RoundToInt(100 * power).ToString();
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
         if (Input.GetButton("PowerUp") && power <= 1)
@@ -134,21 +155,17 @@ public class GameManager : MonoBehaviour {
                             mainCamera.transform.position.z);
         }
     }
+    
+    void BeginSweep()
+    {
+        Debug.Log("BeginningSweep");
+        startTime = Time.deltaTime;
+        cameraSweeping = true;
+    }
 
     void CameraSweep()
-    {
-        float speed = 1.0F;
-        float startTime = Time.deltaTime;
-        float journeyLength = 10f;    
+    { 
         mainCamera.transform.position = new Vector3(255, mainCamera.transform.position.y, mainCamera.transform.position.z);
-        cameraFlag = mainCamera.transform;
-        yield return new WaitForSeconds(3);
-        while (mainCamera.transform.position.x > 0)
-        {
-            float distCovered = (Time.time - startTime) * speed;
-            float fracJourney = distCovered / journeyLength;
-            transform.position = Vector3.Lerp(cameraStart.position, cameraFlag.position, fracJourney);
-        }
     }
 
     void Shot (float _power, float _angle)
